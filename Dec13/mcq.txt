@@ -1,0 +1,319 @@
+1)What is the range of short data type in Java?
+a) -128 to 127
+b) -32768 to 32767 
+c) -2147483648 to 2147483647
+d) None of the mentioned
+
+2)What is the output of this program?
+    class average {
+        public static void main(String args[])
+        {
+            double num[] = {5.5, 10.1, 11, 12.8, 56.9, 2.5};
+            double result;
+            result = 0;
+            for (int i = 0; i < 6; ++i) 
+                result = result + num[i];
+	    System.out.print(result/6);
+ 
+        } 
+    }
+a) 16.34
+b) 16.566666644
+c) 16.46666666666667
+d) 16.46666666666666
+
+3)What is the output of this program?
+    class increment {
+        public static void main(String args[]) 
+        {        
+             int g = 3;
+             System.out.print(++g * 8);
+        } 
+    }
+a) 25
+b) 24
+c) 32
+d) 33
+
+4)Which of these operators is used to allocate memory to array variable in Java?
+a) malloc
+b) alloc
+c) new
+d) new malloc
+
+5) Which of these is an incorrect array declaration?
+a) int arr[] = new int[5].
+b) int [] arr = new int[5].
+c) int arr[] = new int[5].
+d) int arr[] = int [5] new 
+
+6)What is the output of this program?
+    class evaluate 
+    {
+        public static void main(String args[]) 
+            {
+	        int arr[] = new int[] {0 , 1, 2, 3, 4, 5, 6, 7, 8, 9};
+	        int n = 6;
+                n = arr[arr[n] / 2];
+	        System.out.println(arr[n] / 2);
+            } 
+    }
+a) 3
+b) 0
+c) 6
+d) 1
+
+7) Which of the following loops will execute the body of loop even when condition controlling the loop is initially false?
+a) do-while
+b) while
+c) for
+d) none of the mentioned
+
+8)What is the output of this program?
+    class jump_statments 
+    {
+        public static void main(String args[]) 
+        {        
+             int x = 2;
+             int y = 0;
+             for ( ; y < 10; ++y) 
+             {
+                 if (y % x == 0) 
+                     continue;  
+                 else if (y == 8)
+                      break;
+                 else
+                    System.out.print(y + " ");
+             }
+        } 
+    }
+a) 1 3 5 7
+b) 2 4 6 8
+c) 1 3 5 7 9
+d) 1 2 3 4 5 6 7 8 9
+
+9)Which of the following is a type of polymorphism in Java?
+a) Compile time polymorphism
+b) Execution time polymorphism
+c) Multiple polymorphism
+d) Multilevel polymorphism
+
+10)Which concept of Java is a way of converting real world objects in terms of class?
+a) Polymorphism
+b) Encapsulation
+c) Abstraction
+d) Inheritance
+
+11) Which of the following is a valid declaration of an object of class Box?
+a) Box obj = new Box();
+b) Box obj = new Box;
+c) obj = new Box();
+d) new Box obj;
+
+12) Which of the following statements is correct?
+a) Public method is accessible to all other classes in the hierarchy
+b) Public method is accessible only to subclasses of its parent class
+c) Public method can only be called by object of its class
+d) Public method can be accessed by calling object of the public class
+
+13)What is the output of this program?
+    class box 
+    {
+        int width;
+        int height;
+        int length;
+    } 
+    class mainclass 
+    {
+        public static void main(String args[]) 
+        {        
+            box obj1 = new box();
+            box obj2 = new box();
+            obj1.height = 1;
+            obj1.length = 2;
+            obj1.width = 1;
+            obj2 = obj1;
+            System.out.println(obj2.height);
+        } 
+    }
+a) 1
+b) 2
+c) Runtime error
+d) Garbage value
+
+14)What is true about constructor?
+a) It can contain return type
+b) It can take any number of parameters
+c) It can have any non access modifiers
+d) Constructor cannot throw an exception
+
+15) What would be behaviour if the constructor has a return type?
+a) Compilation error
+b) Runtime error
+c) Compilation and runs successfully
+d) Only String return type is allowed
+
+16)Which of this keyword must be used to inherit a class?
+a) super
+b) this
+c) extent
+d) extends
+
+17) A class member declared protected becomes a member of subclass of which type?
+a) public member
+b) private member
+c) protected member
+d) static member
+
+18)What is the output of this program?
+    class A 
+    {
+        int i;
+    }    
+    class B extends A 
+    {
+        int j;
+        void display() 
+        {
+            super.i = j + 1;
+            System.out.println(j + " " + i);
+        }
+    }    
+    class inheritance 
+    {
+        public static void main(String args[])
+        {
+            B obj = new B();
+            obj.i=1;
+            obj.j=2;   
+            obj.display();     
+        }
+   }
+a) 2 2
+b) 3 3
+c) 2 3
+d) 3 2
+
+19)Which of these is not a correct statement?
+a) Every class containing abstract method must be declared abstract
+b) Abstract class defines only the structure of the class not its implementation
+c) Abstract class can be initiated by new operator
+d) Abstract class can be inherited
+
+20)Which of these keywords is not a part of exception handling?
+a) try
+b) finally
+c) thrown
+d) catch
+
+21) What is the use of try & catch?
+a) It allows us to manually handle the exception
+b) It allows to fix errors
+c) It prevents automatic terminating of the program in cases when an exception occurs
+d) All of the mentioned
+
+22)Which of these statements is incorrect?
+a) try block need not to be followed by catch block
+b) try block can be followed by finally block instead of catch block
+c) try can be followed by both catch and finally block
+d) try need not to be followed by anything
+
+23)What is the output of this program?
+    class Output 
+    {
+        public static void main(String args[]) 
+        {
+           try
+           {
+               int a = 0;
+               int b = 5;
+               int c = b / a;
+               System.out.print("Hello");
+           }
+           catch(Exception e) 
+           {
+               System.out.print("World");
+           } 
+           finally 
+           {
+               System.out.print("World");
+           } 
+        }
+    }
+a) Hello
+b) World
+c) HelloWOrld
+d) WorldWorld
+
+24)What is multithreaded programming?
+a) It?s a process in which two different processes run simultaneously
+b) It?s a process in which two or more parts of same process run simultaneously
+c) It?s a process in which many different process are able to access same information
+d) It?s a process in which a single process can access information from many sources
+
+25)What is the name of the thread in output of this program?
+    class multithreaded_programing
+    {
+        public static void main(String args[])
+        {
+            Thread t = Thread.currentThread();
+            System.out.println(t);        
+        }
+    }
+a) main
+b) Thread
+c) System
+d) None of the mentioned
+
+26)Which of these statement is incorrect?
+a) A thread can be formed by implementing Runnable interface only
+b) A thread can be formed by a class that extends Thread class
+c) start() method is used to begin execution of the thread
+d) run() method is used to begin execution of a thread before start() method in special cases
+
+27)Which function of pre defined class Thread is used to check weather current thread being checked is still running?
+a) isAlive()
+b) Join()
+c) isRunning()
+d) Alive()
+
+28)public class MyRunnable implements Runnable 
+{
+    public void run() 
+    {
+        // some code here
+    }
+}
+which of these will create and start this thread?
+
+A.new Runnable(MyRunnable).start();
+B.new Thread(MyRunnable).run();
+C.new Thread(new MyRunnable()).start();
+D.new MyRunnable().start();
+
+29)What will be the output of the program? 
+public class MyProgram 
+{
+    public static void main(String args[])
+    {
+        try 
+        {
+            System.out.print("Hello world ");
+        }
+        finally 
+        {
+            System.out.println("Finally executing ");
+        }
+    }
+}
+
+A.Nothing. The program will not compile because no exceptions are specified.
+B.Nothing. The program will not compile because no catch clauses are specified.
+C.Hello world.
+D.Hello world Finally executing
+
+30)Which of these keywords are used for generating an exception manually?
+a) try
+b) catch
+c) throw
+d) check

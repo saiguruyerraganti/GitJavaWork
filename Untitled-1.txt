@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<h1 align="center">Pink Frag Event Organizer</h1>
+<table align="center" border="1" cellspacing="8" cellpadding="8"> 
+<tr>
+    <th>Name</th>
+    <th>Venue</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+</tr>
+<tr>
+    <td rowspan="2">Wedding Planning</td>
+    <td>Sri Plus Thirumana Mahal</td>   
+    <td>4.5.2018 9.00AM</td>
+    <td>4.5.2018 12.00PM</td>
+</tr>
+<tr>
+    <td>RVS Hall, 2nd Floor</td>
+    <td>6.9.2018 9.30AM</td>
+    <td>6.9.2018 12.30PM</td>
+    
+</tr>
+    
+</table>
+ 
+</html>

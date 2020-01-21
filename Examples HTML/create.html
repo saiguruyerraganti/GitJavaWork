@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id="result"></p>
+<script>
+
+ var hour;
+if (hour < 10) {
+    greeting = "Good morning ";
+}
+else if (hour < 20) {
+    greeting = "Good day";
+}
+else {
+    greeting = "Good evening";
+}
+document.getElementById('result').innerHTML =
+'<b>' + greeting ;
+
+</script>
+
+    <input type="text" id="hour">
+    <input type="submit" id="button" value="Try it">
+    <div id="result"></div>
+</div>
+</body>
+</html>

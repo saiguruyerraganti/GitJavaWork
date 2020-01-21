@@ -1,0 +1,1129 @@
+collections coding activity-10(66% pass)
+----------------------------------------
+Address
+-------------
+public class Address implements Comparable<Address>
+{
+    private String username;//Declaring class variables
+	private String addressLine1;
+	private String addressLine2;
+	private int pincode;
+	
+	public Address() {//Default constructor
+		super();
+	}
+
+	public Address(String username, String addressLine1, String addressLine2, int pincode) {
+		super();//Parameterized constructor
+		this.username = username;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.pincode = pincode;
+	}
+
+	public String getUsername() {//Create getters and setters for variables
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+
+	public int getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
+	}
+
+	@Override
+	public int compareTo(Address o) {
+		if(this.pincode==o.pincode)//If both pincodes are equal
+		{
+			return (this.addressLine1.compareTo(o.addressLine1));//then compare with address lines
+				
+		}
+		else if(this.pincode>o.pincode)//Else compare pincodes
+		return 1;
+		else
+		return -1;
+	}
+
+	@Override
+	public String toString() {//To string to print data in csv format
+		return username + "," + addressLine1 + "," + addressLine2+ "," + pincode;
+	}
+}
+=========================================
+Main
+-------
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args)
+	{
+		Scanner sc= new Scanner(System.in);//Initialize scanner
+		List<Address> li= new ArrayList<Address>();//Initialize arraylist to store data
+		System.out.println("Enter the number of users:");//Get number of users
+		int n= Integer.parseInt(sc.nextLine());
+		System.out.println("Enter user address in CSV(Username,AddressLine 1,AddressLine 2,PinCode)");//Get user details
+		for(int i=0;i<n;i++)
+		{
+			String add= sc.nextLine();
+			String a[]= add.split(",");//Split user details
+			Address ad= new Address(a[0],a[1],a[2],Integer.parseInt(a[3]));//Create object for address class and load details into sonstructor
+			li.add(ad);//add them to arryalist
+		}
+		li.sort(null);//Sort the arryalist
+		System.out.println("User Details:");//Print user details using toString method
+		for (Address address : li) {
+			System.out.println(address);
+		}
+		
+	}
+}
+==================================================================================
+collections application problem-1
+---------------------------------
+PriceAndBookingTimeComparator
+--------------------------------
+import java.util.Comparator;
+public class PriceAndBookingTimeComparator implements Comparator<TicketBooking> {//Price and booking time comparator implementing comparator
+
+    @Override
+    public int compare(TicketBooking booking1, TicketBooking booking2) {//Comparing two objects
+    	if(booking1.getPrice()>booking2.getPrice())//If price of object1 is more than object to then return 1
+		 return 1;
+		else if(booking1.getPrice()<booking2.getPrice())//If price of object1 is less than object to then return 1
+	     return -1;
+		else
+		return (booking1.getBookingTime().compareTo(booking2.getBookingTime()));//if price are equal, then compare booking time
+			
+	}
+
+	
+}
+============================================
+TicketBooking
+-------------------
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class TicketBooking {
+
+    private String stageEventShow;//declaring variables
+    private Date bookingTime;
+    private String seatNumber;
+	private double price;
+	
+	public TicketBooking() {//Default constructor
+		super();
+	}
+
+	public TicketBooking(String stageEventShow, Date bookingTime, String seatNumber, double price) {//Parameterized constructor
+		super();
+		this.stageEventShow = stageEventShow;
+		this.bookingTime = bookingTime;
+		this.seatNumber = seatNumber;
+		this.price = price;
+	}
+
+	public String getStageEventShow() {//Getter and setters for variables in class
+		return stageEventShow;
+	}
+
+	public void setStageEventShow(String stageEventShow) {
+		this.stageEventShow = stageEventShow;
+	}
+
+	public Date getBookingTime() {
+		return bookingTime;
+	}
+
+	public void setBookingTime(Date bookingTime) {
+		this.bookingTime = bookingTime;
+	}
+
+	public String getSeatNumber() {
+		return seatNumber;
+	}
+
+	public void setSeatNumber(String seatNumber) {
+		this.seatNumber = seatNumber;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public String toString()//toString method to print data
+	{
+		String st= new SimpleDateFormat("dd-MM-yyyy").format(bookingTime);
+		System.out.printf("%-15s%-15s%-15s%-15s",stageEventShow,st,seatNumber,price);
+		return "";
+	}
+	
+	
+}
+==========================================================
+Main
+-------------
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+public static void main(String[] args) throws NumberFormatException, ParseException {
+        
+    	Scanner sc= new Scanner(System.in);//Initializing scanner
+		List<TicketBooking> li= new ArrayList<TicketBooking>();//Creating arraylist to store values
+		System.out.println("Enter the number of bookings:");//Get number of bookings from user
+		int n= Integer.parseInt(sc.nextLine());
+		
+		for(int i=0;i<n;i++)//Get booki details
+		{
+			System.out.println("Enter the details of booking "+(i+1));
+			String data= sc.nextLine();
+			String a[]= data.split(",");//Split the string 
+			TicketBooking tb= new TicketBooking(a[0],(new SimpleDateFormat("dd-MM-yyyy").parse(a[1])),a[2],Double.parseDouble(a[3]));
+			li.add(tb);//Creating object for Ticketbooking class and adding it to arrayList
+		}
+		System.out.println("Sorted Order:");
+		Collections.sort(li,new PriceAndBookingTimeComparator());//Sorting using price and Booking time comparator
+		System.out.printf("%-15s%-15s%-15s%-15s\n","Event name","Booking Time","Seat number","Price");
+		for (TicketBooking ticketBooking : li) {//Printing sorted list
+			System.out.println(ticketBooking);
+		}
+
+	}
+}
+=========================================================================
+collections application problem-2
+---------------------------------
+Main
+------
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Main {
+
+    public static void main(String[] args) throws Exception, IOException {
+        InputStreamReader input= new InputStreamReader(System.in);//Initializing input stream reader
+		BufferedReader br= new BufferedReader(input);//Initializing buffered reader
+		List<List<Integer>> li= new ArrayList<List<Integer>>();//Initializing arrayList to store list
+		List<Integer> list = new ArrayList<Integer>();//Initializing arraylist to store list values
+		char sel=0;//Set selector as zero
+		System.out.println("Enter the count of booked tickets:");
+		for(int i=0;i<5;i++)//Get count of booked tickets
+		{
+			System.out.println("On Day "+(i+1));
+			String s= br.readLine();
+			String a[]=s.split(",");//Spit tickets count
+			for(int j=0;j<a.length;j++)
+			{
+				list.add(100-Integer.parseInt(a[j]));//Store it into a list
+			}
+			li.add(list);//Add lists into arraylist
+		}
+		/*for (Integer integer : list) {
+			System.out.println(integer);
+		}*/
+		do//Do loop starts
+		{
+			System.out.println("Enter the day to know its remaining ticket count:");//Get day from user
+			int n=Integer.parseInt(br.readLine());
+			System.out.print("Remaining tickets:[");//Print details of selected date
+			System.out.print(list.get(4*n-4)+", "+list.get(4*n-3)+", "+list.get(4*n-2)+", "+list.get(4*n-1)+"]\n");
+			System.out.println("Do you want to continue?(y/n)");//Get user choice
+			sel=br.readLine().charAt(0);
+		}while(sel=='y'||sel=='Y');//If user choice is yes repeat loop
+
+	}
+
+}
+==================================================================================
+collections application problem-3(Accepted-PE)
+---------------------------------
+Address
+--------
+class Address {
+ 
+ private String addressLine1;//Declaring variables
+ private String addressLine2;
+ private String city;
+ private String state;
+ private int pincode;
+ 
+ public Address() {//Default constructor
+  super();
+ }
+ public Address(String addressLine1, String addressLine2, String city, String state, int pincode) {//Parameterized constructor
+  super();
+  this.addressLine1 = addressLine1;
+  this.addressLine2 = addressLine2;
+  this.city = city;
+  this.state = state;
+  this.pincode = pincode;
+ }
+ public String getAddressLine1() {//Getters and Setters for Variables
+  return addressLine1;
+ }
+ public void setAddressLine1(String addressLine1) {
+  this.addressLine1 = addressLine1;
+ }
+ public String getAddressLine2() {
+  return addressLine2;
+ }
+ public void setAddressLine2(String addressLine2) {
+  this.addressLine2 = addressLine2;
+ }
+ public String getCity() {
+  return city;
+ }
+ public void setCity(String city) {
+  this.city = city;
+ }
+ public String getState() {
+  return state;
+ }
+ public void setState(String state) {
+  this.state = state;
+ }
+ public int getPincode() {
+  return pincode;
+ }
+ public void setPincode(int pincode) {
+  this.pincode = pincode;
+ }
+@Override
+public String toString() {
+    System.out.printf("%-15s%-15s%-15s%-15s%-15s",addressLine1,addressLine2,city,state,pincode);
+	/*return "Address [addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", city=" + city + ", state="
+			+ state + ", pincode=" + pincode + "]";*/
+	return "";
+} 
+}
+===========================================
+Main
+-------------
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+public class Main {
+ 
+ public static void main(String args[])//Start of main method
+ {
+  Scanner sc= new Scanner(System.in);//Initializing scanner
+  List<Address> add= new ArrayList<Address>();//Defining list to store address
+  Map<String,List<Address>> ct= new HashMap<String,List<Address>>();//Define map to store city as key value
+  Map<String,Map<String,List<Address>>> st= new HashMap<String, Map<String,List<Address>>>();
+  //Define map to store state as key
+  System.out.println("Enter the number of address");//Get number of addresses
+  int n= Integer.parseInt(sc.nextLine());
+  
+  for(int i=0;i<n;i++)
+  {
+   System.out.println("Enter the address "+(i+1)+" detail");//Get addresses from user
+   String s= sc.nextLine();
+   String a[]= s.split(",");//Split addresses
+   Address ad= new Address(a[0], a[1], a[2], a[3], Integer.parseInt(a[4]));//Create object for address class and load details
+   add.add(ad);//Add address details to list
+   ct.put(a[2], add);//Add city name and list to map
+   st.put(a[3], ct);//Add statename and previous map to statemap
+  }
+    
+  /*for (String string : ct) {
+	System.out.println(string);
+}*/
+  
+  System.out.println("Enter the state to be searched");//Get element to be searched from user
+  String sstate= sc.nextLine();
+  if(st.containsKey(sstate))//Check if state contains in key of sstate map
+  {
+   System.out.println("Enter the city to be searched");
+   String scity= sc.nextLine();
+   if(ct.containsKey(scity))//Check if value contains in key of svalue map
+   {
+	System.out.printf("%-15s%-15s%-15s%-15s%-15s\n","Line 1","Line 2","City","State","Pincode");
+    for (Address address : add) {//Iterate address list
+    	if(address.getCity().equals(scity))//If city entered equals to the city in list
+    	{
+    		System.out.println(address);	//Print the address
+	    }	
+	}
+   }
+   else
+   {
+    System.out.println("Searched city not found");//If state is not found then print not found
+   }
+   
+  }
+  else
+  {
+   System.out.println("Searched state not found");//If state is not found then print not found
+  }
+ }
+}
+========================================================================================
+collections application problem-4
+---------------------------------
+Address
+------------
+public class Address implements Comparable<Address>
+{
+    private String username;//Declaring class variables
+	private String addressLine1;
+	private String addressLine2;
+	private int pincode;
+	
+	public Address() {//Default constructor
+		super();
+	}
+
+	public Address(String username, String addressLine1, String addressLine2, int pincode) {
+		super();//Parameterized constructor
+		this.username = username;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.pincode = pincode;
+	}
+
+	public String getUsername() {//Create getters and setters for variables
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+
+	public int getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
+	}
+
+	@Override
+	public int compareTo(Address o) {
+		if(this.pincode==o.pincode)//If both pincodes are equal
+		{
+			return (this.addressLine1.compareTo(o.addressLine1));//then compare with address lines
+				
+		}
+		else if(this.pincode>o.pincode)//Else compare pincodes
+		return 1;
+		else
+		return -1;
+	}
+
+	@Override
+	public String toString() {//To string to print data in csv format
+		return username + "," + addressLine1 + "," + addressLine2+ "," + pincode;
+	}
+}
+===============================================
+Main
+----------
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args)
+	{
+		Scanner sc= new Scanner(System.in);//Initialize scanner
+		List<Address> li= new ArrayList<Address>();//Initialize arraylist to store data
+		System.out.println("Enter the number of users:");//Get number of users
+		int n= Integer.parseInt(sc.nextLine());
+		System.out.println("Enter user address in CSV(Username,AddressLine 1,AddressLine 2,PinCode)");//Get user details
+		for(int i=0;i<n;i++)
+		{
+			String add= sc.nextLine();
+			String a[]= add.split(",");//Split user details
+			Address ad= new Address(a[0],a[1],a[2],Integer.parseInt(a[3]));//Create object for address class and load details into sonstructor
+			li.add(ad);//add them to arryalist
+		}
+		li.sort(null);//Sort the arryalist
+		System.out.println("User Details:");//Print user details using toString method
+		for (Address address : li) {
+			System.out.println(address);
+		}
+		
+	}
+}
+===================================================================================
+collections additional problem-2
+---------------------------------
+Main
+----------
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Main{
+
+    public static void main(String[] args) throws NumberFormatException, ParseException {
+		
+		Scanner sc= new Scanner(System.in);//Initialoze scanner
+		Map<String,Integer> map1= new HashMap<String,Integer>();//Create map to store string and integer in map
+		Map<Date,Map<String,Integer>> map2= new HashMap<Date,Map<String,Integer>>();//Create map to store date and map in map
+		
+		System.out.println("Enter number of show times");//Get number of shows from user
+		int n= Integer.parseInt(sc.nextLine());
+		System.out.println("Enter details of showtimes in CSV(Show Date(dd/MM/yyyy),Show Time Interval(Eg:1PM-4PM),Tickets Booked)");
+		for(int i=0;i<n;i++)
+		{
+			String details= sc.nextLine();//Get details from user
+			String det[]= details.split(",");//Split details
+			//TicketBooking tb= new TicketBooking(/*new SimpleDateFormat("dd/MM/yyyy").parse(det[0])*/new SimpleDateFormat("ha-ha").parse(det[1]),Integer.parseInt(det[2]));
+			map1.put(det[1],Integer.parseInt(det[2]));//Store it into map
+			map2.put(new SimpleDateFormat("dd/MM/yyyy").parse(det[0]),map1);
+		}
+		System.out.println("Enter a show details to find tickets booked in CSV(Show Date(dd/MM/yyyy),Show Time Interval(Eg:1PM-4PM))");
+		String search=sc.nextLine();//Get data to search
+		String details[]= search.split(",");//Split the data to search
+		if(map2.containsKey(new SimpleDateFormat("dd/MM/yyyy").parse(details[0])))//If map2 consists the date
+		{
+			if(map1.containsKey(details[1]))//If map1 contains time
+			{
+				System.out.println("Tickets Booked = "+map1.get(details[1]));//Print number of tickets
+			}
+			else
+			{
+				System.out.println("No show in a particular time");//If map2 doesnt contain key then print no show
+			}
+			
+		}
+		else
+		{
+			System.out.println("No show in a particular time");//If map2 doesnt contain key then print no show
+		}
+
+	}
+
+}
+==================================================================================
+Threads Additional problem-1
+----------------------------------
+EventThread
+--------------
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+public class EventThread {//start of class eventthread
+    
+	public Map<String, Integer> eventMonths(final List<Event> eventList)//Method to get event months count
+	{
+		Map<String,Integer> mp= new HashMap<>();//Initialize a map to store months count
+		ExecutorService executor = Executors.newSingleThreadExecutor();//Initialize executorservice for execution
+		int value=1;//Initialize primary value
+		for (Event event : eventList) {//For eventList
+	    //System.out.println(event.getEventDate());
+		String month= new SimpleDateFormat("MMMM").format(event.getEventDate());//Get month from event date
+		//System.out.println(month);
+		if(mp.containsKey(month))//If that month already contains in map
+		{
+			int i=mp.get(month);
+			i++;//Increment value of the respective key and store it
+			mp.put(month, i);
+		}
+		else
+		{
+			mp.put(month, value);//Else add it to map
+		}
+		}   
+		executor.shutdown();//shutdown executor
+		try {
+			executor.awaitTermination(200,TimeUnit.MILLISECONDS);//wait to terminate till 200ms
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    return mp;//Return count map
+		
+	}
+
+}
+==============================================
+Event
+-----------
+import java.util.Date;
+
+public class Event {//Start of event class
+    
+	private String name;//declaring variables
+	private Date eventDate;
+	private String organizer;
+	
+	public Event() {//default constructor
+		super();
+	}
+
+	public Event(String name, Date eventDate, String organizer) {//parameterized constructor
+		super();
+		this.name = name;
+		this.eventDate = eventDate;
+		this.organizer = organizer;
+	}
+
+	public String getName() {//getters and setters for variables
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(Date eventDate) {
+		this.eventDate = eventDate;
+	}
+
+	public String getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(String organizer) {
+		this.organizer = organizer;
+	}
+
+}
+====================================================
+Main
+------------
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+
+    public static void main(String[] args) throws ParseException {
+		
+		Scanner sc= new Scanner(System.in);//Initialize scanner
+		List<Event> li= new ArrayList<Event>();//Initialize list
+		
+		System.out.println("Enter the number of events");//Get number of events from user
+		int n= Integer.parseInt(sc.nextLine());
+		if(n<=0)//If n value is zero or less than zero
+		{
+			System.out.println("Invalid Input");//Print invalid input
+		}
+		else//Else
+		{
+			System.out.println("Enter event details in CSV(Event Name,Event Date,Organizer Name)");//Get details from user
+			for(int i=0;i<n;i++)
+			{
+				String event=sc.nextLine();
+				String det[]= event.split(",");//Split details
+				Event et= new Event(det[0], new SimpleDateFormat("dd/MM/yyyy").parse(det[1]),det[2]);//Create object for Event class
+				li.add(et);//Add to the list
+			}
+			EventThread et= new EventThread();//Create object for event thread
+			Map<String, Integer> count= et.eventMonths(li);//Get count of months from eventMonths method
+			Set<String> set= count.keySet();//Initialize seperate set to store keys of map
+			for (String string : set) {//Print using keySet
+				System.out.println(string+" = "+count.get(string)+" events");
+			}
+		}
+
+	}
+
+}
+=======================================================================================
+Streams and Writers Coding activity-2
+----------------------------------------
+Hall
+-------------
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+public class Hall {
+    
+	private String hallName;//Declaring variables
+	private String contact;
+	private double costPerDay;
+	private String owner;
+	
+	public Hall() {//Default constructor
+		super();
+	}
+
+	public Hall(String hallName, String contact, double costPerDay, String owner) {//Parameterized constructor
+		super();
+		this.hallName = hallName;
+		this.contact = contact;
+		this.costPerDay = costPerDay;
+		this.owner = owner;
+	}
+
+	public String getHallName() {//Getters ad setters for variables
+		return hallName;
+	}
+
+	public void setHallName(String hallName) {
+		this.hallName = hallName;
+	}
+
+	public String getContact() {
+		return contact;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public double getCostPerDay() {
+		return costPerDay;
+	}
+
+	public void setCostPerDay(double costPerDay) {
+		this.costPerDay = costPerDay;
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+	
+    public static void writeHallDetails(List<Hall> halls)
+	{
+		FileWriter fi=null;
+		try {
+			fi= new FileWriter("hall.csv",false);//Create a file
+			for (Hall hall : halls) {
+				String s= hall. hallName+","+hall.contact+","+hall.costPerDay+","+hall.owner+"\n";//Get hall details into a string
+				fi.write(s);//Write it in the file
+				//System.out.println("Ok...");
+			}
+		    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			fi.close();//Close the file
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+
+}
+==================================================
+Main
+-------------
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+		
+		Scanner sc= new Scanner(System.in);//Initialize scanner
+		
+		List<Hall> li= new ArrayList<>();//Initialize arraylist to store hall details
+		
+		System.out.println("Enter the number of halls:");//Get number of halls from user
+		int n= Integer.parseInt(sc.nextLine());
+		
+		for(int i=0;i<n;i++)
+		{
+			String hall=sc.nextLine();//Get hall details
+			String det[]= hall.split(",");//Split hall details
+			Hall h= new Hall(det[0],det[1],Double.parseDouble(det[2]),det[3]);//Load it into constructor
+			li.add(h);//Add it to list
+		}
+		Hall.writeHallDetails(li);//Call write hall list 
+		//System.out.println("Success....");	
+	}
+}
+===================================================================================
+Streams and Writers Coding activity-3
+----------------------------------------
+ItemType
+------------
+public class ItemType {
+    
+	private String name;//Declaring variables
+	private double deposit;
+	private double costPerDay;
+	
+	public ItemType() {//Default constructor
+		super();
+	}
+
+	public ItemType(String name, double deposit, double costPerDay) {//Parameterized constructor
+		super();
+		this.name = name;
+		this.deposit = deposit;
+		this.costPerDay = costPerDay;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getDeposit() {
+		return deposit;
+	}
+
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
+	}
+
+	public double getCostPerDay() {
+		return costPerDay;
+	}
+
+	public void setCostPerDay(double costPerDay) {
+		this.costPerDay = costPerDay;
+	}
+}
+=======================================================
+ItemTypeBO
+----------------
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class ItemTypeBO {
+    
+public List<ItemType> readFromFile(BufferedReader br) throws IOException//readFromFile method
+{
+	List<ItemType> li= new ArrayList<ItemType>();//Initialize arraylist 
+	String line;//Initialize line
+	while((line=br.readLine())!=null){//If file not reached to end
+		
+		String details[] = new String[3];//Initialize string array to store data
+		StringTokenizer st=new StringTokenizer(line);//Initialize string tokenizer to remove space
+		int i=0;  
+		while (st.hasMoreElements()) {
+			details[i]=st.nextToken();//Copy data int array
+			i++;
+		}
+		
+		ItemType it= new ItemType(details[0],Double.parseDouble(details[1]),Double.parseDouble(details[2]));//Create object for itemtype class and load data into constructor
+		li.add(it);//Add it to list
+	}
+	return li;//Return list
+	
+}
+
+public List<ItemType> depositList(List<ItemType> list)//Deposit list method start
+{
+	List<ItemType> li= new ArrayList<ItemType>();//Initialize arraylist
+	for (ItemType itemType : list) {//For elements in list
+		if(itemType.getDeposit()>2000)//If deposit is greater than 2000
+		{
+			ItemType it= new ItemType(itemType.getName(),itemType.getDeposit(),itemType.getCostPerDay());//Create object for itemtype class and load data into constructor
+			li.add(it);//Add it to list
+		}
+	}
+	return li;//Return list
+}
+
+public void display(List<ItemType> list)//Display method start
+{
+	for (ItemType itemType : list) {//Print data in list
+		System.out.format("%-15s %-15s %s\n",itemType.getName(),itemType.getDeposit(),itemType.getCostPerDay());
+	}
+	
+}
+}
+===========================================================
+Input.txt
+-----------
+Electronics    1000   200  
+Chemicals      500    100  
+Electrical     2100   500  
+Construction   5000   1000 
+======================================================
+Main
+-----------
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) throws FileNotFoundException {
+		
+		FileReader input= new FileReader("input.txt");
+		BufferedReader br= new BufferedReader(input);
+		List<ItemType> li=null;
+		List<ItemType> li2=null;
+		
+		ItemTypeBO ibo= new ItemTypeBO();//Creating object for ItemTypeBO class
+		
+		try {
+			li=ibo.readFromFile(br);//Call method readfromFile to get data from file to list
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		int count=0;//To get count of entries whose deposit is more than 2000
+		for (ItemType string : li) {
+			if(string.getDeposit()>2000)//Check deposit
+			{
+				count++;//If deposit is more than 2000, increment the count
+			}
+		}
+		
+		if(count==0)//If count is zero
+		{
+			System.out.println("No item type has deposit more than 2000");//Print no item type
+		}
+		else
+		{
+			li2=ibo.depositList(li);
+			System.out.format("%-15s %-15s %s\n","Item type","Deposit","Cost per day");//Else seperate list of deposites
+			ibo.display(li2);//Display seperated list
+		}
+		
+		
+
+	}
+
+}
+===================================================================================
+Streams and Writers Additional problem-1
+----------------------------------------
+ItemType
+--------------
+public class ItemType {
+    
+	private String itemTypeName;//Declaring variables
+	private double cost;
+	
+	public ItemType() {//Default constructor
+		super();
+	}
+
+	public ItemType(String itemTypeName, double cost) {//Parameterized constructor
+		super();
+		this.itemTypeName = itemTypeName;
+		this.cost = cost;
+	}
+
+	public String getItemTypeName() {//Getters and setters for variables
+		return itemTypeName;
+	}
+
+	public void setItemTypeName(String itemTypeName) {
+		this.itemTypeName = itemTypeName;
+	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+}
+=================================================================
+Item
+---------
+public class Item {
+    
+	private int itemNumber;//Declaring variables
+	private String vendor;
+	private ItemType itemType;
+	
+	public Item() {//Default constructor
+		super();
+	}
+
+	public Item(int itemNumber, String vendor, ItemType itemType) {//Parameterized constructor
+		super();
+		this.itemNumber = itemNumber;
+		this.vendor = vendor;
+		this.itemType = itemType;
+	}
+
+	public int getItemNumber() {//Getters and setters for variables
+		return itemNumber;
+	}
+
+	public void setItemNumber(int itemNumber) {
+		this.itemNumber = itemNumber;
+	}
+
+	public String getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
+	}
+
+	public ItemType getItemType() {
+		return itemType;
+	}
+
+	public void setItemType(ItemType itemType) {
+		this.itemType = itemType;
+	}
+}
+=========================================================
+ItemBO
+-----------
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
+public class ItemBO {
+    
+	void writeFile(List<Item> li,FileWriter fr)//Method writeFile start
+	{
+		
+		for (Item item : li) {//for items in list
+			try {
+				String det= item.getItemNumber()+","+item.getVendor()+","+item.getItemType().getItemTypeName()+","+item.getItemType().getCost()+"\n";
+				fr.write(det);//Write into file
+			} 
+			catch (IOException e) {
+				e.printStackTrace();//If exception occurs then print exception data
+			}
+			
+		}
+		try {
+			fr.close();//Close the file
+		    } 
+		catch (IOException e) {
+			e.printStackTrace();//If exception occurs then print exception data
+		}
+	}
+
+}
+=====================================================================
+Output.txt-No progam
+============================
+Main
+---------
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {//Start of main method
+		
+		Scanner sc= new Scanner(System.in);//Initialize scanner
+		List<Item> li= new ArrayList<>();//Initialize arraylist
+		FileWriter fr=null;//Initialize arraylist
+		try {
+			fr = new FileWriter("output.txt");//Create a file
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Enter number of items purchased");//Get number of items purchased from user
+		int n= Integer.parseInt(sc.nextLine());
+		if(n<=0)//If n is less than or equal to zero
+		{
+			System.out.println("Invalid Input");//print invalid input
+		}
+		else
+		{
+			System.out.println("Enter item details in CSV(Item Number,Vendor Name,ItemType Name,Cost)");
+			for(int i=0;i<n;i++)
+			{
+				String line= sc.nextLine();//Get details from user
+				String details[]= line.split(",");//split details
+				ItemType it= new ItemType(details[2], Double.parseDouble(details[3]));//create object for ItemType class
+				Item it1= new Item(Integer.parseInt(details[0]),details[1],it);//Create item for item class
+				li.add(it1);//add it to list
+			}
+			
+			ItemBO bo= new ItemBO();//Create object for ItemBO
+			bo.writeFile(li, fr);//Call method writeFile to write data into file
+		}
+		}
+
+}
+=========================================================================================

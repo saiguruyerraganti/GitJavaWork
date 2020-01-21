@@ -1,0 +1,170 @@
+Airport
+
+public class Airport {
+    
+	private String iataAirportCode;  //initializing variables
+	private String name;
+	private String city;
+	private int noOfFlights;
+	
+	public Airport() {             //Default Constructor
+		super();
+	}
+
+	public Airport(String iataAirportCode, String name, String city, int noOfFlights) { //Parameterized Constructor
+		super();
+		this.iataAirportCode = iataAirportCode;
+		this.name = name;
+		this.city = city;
+		this.noOfFlights = noOfFlights;
+	}
+
+	public Airport(String name, String city, int noOfFlights) {
+		super();
+		//this.iataAirportCode = iataAirportCode;
+		this.name = name;
+		this.city = city;
+		this.noOfFlights = noOfFlights;
+	}
+
+	public String getIataAirportCode() {
+		return this.iataAirportCode;
+	}
+
+	public void setIataAirportCode(String iataAirportCode) {
+		this.iataAirportCode = iataAirportCode;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public int getNoOfFlights() {
+		return this.noOfFlights;
+	}
+
+	public void setNoOfFlights(int noOfFlights) {
+		this.noOfFlights = noOfFlights;
+	}
+	
+
+}
+=====================
+CommercialServiceAirport
+
+public class CommercialServiceAirport extends Airport {
+    
+	private int noOfpassengersperflight;
+
+	public CommercialServiceAirport() {      //Default Constructor
+		super();
+	}
+
+	public CommercialServiceAirport(String name, String city, int noOfFlights, int noOfpassengersperflight) {
+		super(name, city, noOfFlights);
+		this.noOfpassengersperflight=noOfpassengersperflight;
+	}                                          //Parameterized Constructor
+
+	public int getNoOfpassengersperflight() {
+		return noOfpassengersperflight;
+	}
+
+	public void setNoOfpassengersperflight(int noOfpassengersperflight) {
+		this.noOfpassengersperflight = noOfpassengersperflight;
+	}
+	
+	public int calculatenoOfPassengers(int noOfFlights, int noOfpassengersperflight)  // Method to calculate no of passengers
+	{
+		return noOfFlights*noOfpassengersperflight;
+	}	
+
+}
+=========
+Main
+
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+public class Main {
+    public static void main(String args[]) throws Exception
+	{                 
+
+
+
+
+                   String name,city;
+                   int noOfFlights;
+                   int  noOfpassengersflight;
+                   int noOfcargoUnitsflight;
+
+          
+		   
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                
+		
+		           	System.out.println("Enter the name");
+			        name=br.readLine();
+
+                    System.out.println("Enter the city");
+			        city=br.readLine();
+
+                    System.out.println("Enter the number of flights per day");
+                    noOfFlights=Integer.parseInt(br.readLine());
+                         
+                    System.out.println("Enter the number of passengers travelling in each flight");
+                    noOfpassengersflight=Integer.parseInt(br.readLine());
+
+                    System.out.println("Enter the number of cargo units shipped in each flight");
+                    noOfcargoUnitsflight=Integer.parseInt(br.readLine());
+	 	        
+		             Airport rt=new Airport(name,city,noOfFlights);
+		             CommercialServiceAirport cms=new CommercialServiceAirport(name,city,noOfFlights,noOfpassengersflight);
+           	         CargoServiceAirport cas=new CargoServiceAirport(name,city,noOfFlights,noOfcargoUnitsflight);			
+			
+                    System.out.println("Airport Details");
+                    int pt=cms.calculatenoOfPassengers(noOfFlights,noOfpassengersflight);
+			        System.out.println("Number of passengers travelled/day:"+pt);
+                       
+                    int ct=cas.calculatenoOfCargounits(noOfFlights,noOfcargoUnitsflight); 
+                    System.out.println("Number of cargo units shipped/day:"+ct);
+		
+	}
+
+}
+
+============
+CargoServiceAirport
+
+public class CargoServiceAirport extends Airport {
+    
+	private int noOfcargoUnitsperflight;
+
+	public CargoServiceAirport() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public CargoServiceAirport(String name, String city, int noOfFlights,int noOfcargoUnitsperflight) {
+		super(name, city, noOfFlights);
+		this.noOfcargoUnitsperflight=noOfcargoUnitsperflight;
+	}
+	
+	public int calculatenoOfCargounits(int noOfFlights, int noOfcargoUnitsperflight)
+	{
+		return noOfFlights*noOfcargoUnitsperflight;
+	}
+	
+}
+

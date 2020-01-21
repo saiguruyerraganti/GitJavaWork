@@ -1,0 +1,19 @@
+//package Exercises;
+public class AddressBookdemo{
+public static void main(String args[]){
+	AddressBook ab=new AddressBook();
+	AddressBook.Address address=new AddressBook().new Address();
+	address.setHousename("jayalakshmi nilayam");
+	address.setStreet("seethamvari street");
+	address.setCity("vijayawada");
+	address.setState("andhra pradesh");
+	ab.setTempAdd(address);
+
+        AddressBook.Address address=new AddressBook().new Address();
+        address.setHousename("srinivasa nilayam");
+	address.setStreet("bhanu street");
+	address.setCity("nuzvid");
+	address.setState("andhra pradesh");
+	ab.setPermAdd(address);
+
+System.out.println("Temporary address:\n"+)
